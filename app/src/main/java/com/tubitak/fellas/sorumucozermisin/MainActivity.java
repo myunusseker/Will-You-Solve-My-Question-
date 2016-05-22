@@ -4,13 +4,23 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.Date;
+
+
 public class MainActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+    private QuestionAdapter mAdapter;
+    ArrayList<Question> questions = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +36,21 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mAdapter = new QuestionAdapter(questions);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        initialize();
+
+    }
+
+    private void initialize() {
+        for (int i=0; i<10; i++)
+            questions.add(new Question("","Soru metni burasi " + i,
+                    "soru basligi",(new Date(System.currentTimeMillis())).toString()));
     }
 
     @Override
