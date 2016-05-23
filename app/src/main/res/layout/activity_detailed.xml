@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.tubitak.fellas.sorumucozermisin.DetailedActivity">
+    tools:context=".AddQuestion">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,14 +26,20 @@
                 android:id="@+id/questionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="30"
+                android:textAlignment="center"
                 android:hint="Soru başlığını giriniz"/>
 
             <EditText
                 android:id="@+id/questionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:maxLength="1000"
+                android:hint="Soruyu giriniz."
                 android:minHeight="80dp"/>
             <Button
+                android:id="@+id/askQuestion"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
