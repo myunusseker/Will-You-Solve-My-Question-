@@ -66,6 +66,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
                 intent.putExtra("title",selected.getTitle());
                 intent.putExtra("question",selected.getQuestion());
                 intent.putExtra("photo",selected.getPhoto());
+                intent.putExtra("bitmap",selected.getBitmapPhoto());
                 intent.putExtra("date",selected.getDate());
                 context.startActivity(intent);
             }

@@ -5,12 +5,15 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,8 +40,9 @@ public class QuestionActivity extends AppCompatActivity {
                 getIntent().getStringExtra("photo"),
                 getIntent().getStringExtra("date")
         );
+        myQ.setBitmapPhoto((Bitmap) getIntent().getParcelableExtra("bitmap"));
         title = (TextView) findViewById(R.id.titleQuestion);
-        photo = findViewById(R.id.photoQuestion);
+        photo = (ImageButton) findViewById(R.id.photoQuestion);
         question = (TextView) findViewById(R.id.question);
         username = (TextView) findViewById(R.id.usernameQuestion);
         date = (TextView) findViewById(R.id.dateQuestion);
@@ -46,14 +50,16 @@ public class QuestionActivity extends AppCompatActivity {
         question.setText(myQ.getQuestion());
         username.setText(myQ.getUsername() + " tarafindan soruldu");
         date.setText(myQ.getDate());
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), myQ.getBitmapPhoto());
+        photo.setBackground(bitmapDrawable);
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                zoomImageFromThumb(photo, R.drawable.web_hi_res_512);
+                zoomImageFromThumb(photo);
             }
         });
     }
-    private void zoomImageFromThumb(final View thumbView, int imageResId) {
+    private void zoomImageFromThumb(final View thumbView) {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
         if (mCurrentAnimator != null) {
@@ -63,7 +69,7 @@ public class QuestionActivity extends AppCompatActivity {
         // Load the high-resolution "zoomed-in" image.
         final ImageView expandedImageView = (ImageView) findViewById(
                 R.id.expanded_image);
-        expandedImageView.setImageResource(imageResId);
+        expandedImageView.setImageBitmap(myQ.getBitmapPhoto());
 
         // Calculate the starting and ending bounds for the zoomed-in image.
         // This step involves lots of math. Yay, math.
