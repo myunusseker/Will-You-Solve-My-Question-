@@ -2,6 +2,7 @@ package com.tubitak.fellas.sorumucozermisin.classes;
 
 import android.graphics.Bitmap;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -40,6 +41,7 @@ public class RequestHandler {
             OutputStream os = conn.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, "UTF-8"));
+            Log.i("asdf","post string -> " + getPostDataString(postDataParams));
             writer.write(getPostDataString(postDataParams));
 
             writer.flush();
@@ -56,7 +58,7 @@ public class RequestHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        Log.i("asdf", "soru ekleme -> " + response);
         return response;
     }
     private static String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {

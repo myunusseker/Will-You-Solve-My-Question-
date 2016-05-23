@@ -11,9 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.tubitak.fellas.sorumucozermisin.classes.Globals;
 import com.tubitak.fellas.sorumucozermisin.classes.RequestHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -74,6 +78,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             data.put("title",titleStr);
             data.put("question",questionStr);
             data.put("photo",imageString);
+            Log.i("asdf","-> " + imageString);
 
             String Datetime;
             Calendar c = Calendar.getInstance();
@@ -83,6 +88,21 @@ public class AddQuestionActivity extends AppCompatActivity {
             String response = RequestHandler.sendPostRequest(Globals.url+"addQuestion.php",data);
             Log.i("response",response);
             return response;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            try {
+                JSONObject json = new JSONObject(response);
+                if(json.getString("result").equals("success")){
+                    Intent intent = new Intent(AddQuestionActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.i("asdf","response2 -> " + response);
+            }
         }
     }
 }

@@ -3,6 +3,8 @@ package com.tubitak.fellas.sorumucozermisin;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -160,13 +163,20 @@ public class MainActivity extends AppCompatActivity {
                     for(int i=0;i<reader.length();i++)
                     {
                         JSONObject r = reader.getJSONObject(i);
+                        String encodedImage = r.getString("photo");
+                        byte[] decodedString = Base64.decode(r.getString("photo"), Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
                         questionList.add(new Question(r.getInt("idquestion"),
                                                     r.getString("username"),
                                                     r.getString("title"),
                                                     r.getString("question"),
-                                                    r.getString("photo"),
+                                                    decodedByte,
                                                     r.getString("datequestion")
                                 ));
+
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
