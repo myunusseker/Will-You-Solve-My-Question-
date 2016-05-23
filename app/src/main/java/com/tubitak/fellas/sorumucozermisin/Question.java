@@ -1,47 +1,63 @@
 package com.tubitak.fellas.sorumucozermisin;
 
-/**
- * Created by mehmet on 13/05/16.
- */
 public class Question {
-    private String imageLink, text, title, date;
+    private int id;
+    private String username,photo, question, title, date;
 
-    public Question(String imageLink, String text, String title, String date) {
-        this.imageLink = imageLink;
-        this.text = text;
-        this.title = title;
-        this.date = date;
+    public Question(int id,String username,String title, String question, String photo, String date) {
+        setId(id);
+        setUsername(username);
+        setTitle(title);
+        setQuestion(question);
+        setPhoto(photo);
+        setDate(date);
     }
 
-    public String getImageLink(){
-        return imageLink;
+    public int getId() {
+        return id;
     }
 
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public String getUsername() {
+        return username;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getPhoto() {
+        return photo;
     }
 
-    public String getText() {
-        return text;
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

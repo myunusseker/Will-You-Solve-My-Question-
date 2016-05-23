@@ -10,7 +10,7 @@
         android:id="@+id/questionTitle"
         android:layout_width="match_parent"
         android:layout_gravity="center"
-        android:textAlignment="center"
+        android:gravity="left"
         android:layout_height="wrap_content" />
 
     <ImageView
@@ -22,8 +22,14 @@
 
     <TextView
         android:id="@+id/questionText"
-        android:textAlignment="center"
-        android:background="#123123"
+        android:gravity="left"
+        android:background="#999999"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/questionUsername"
+        android:gravity="right"
+        android:background="#888888"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("MyPref",Context.MODE_PRIVATE);
 
         String user = sharedPref.getString(getString(R.string.username_string),"YOKKK");
-        Log.i("asdf",user);
         if(!user.equals("YOKKK")){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
@@ -51,6 +50,12 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         signup = (TextView) findViewById(R.id.signup_text);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        if(getIntent().getStringExtra("SignUp") != null && getIntent().getStringExtra("SignUp").equals("success"))
+        {
+            Snackbar snackbar = Snackbar.make(coordinatorLayout,"Başarıyla kayıt oldunuz.",Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                     errorMessage += "Password field is empty\n";
 
                 if(errorMessage.equals(""))
-                    new Async().execute(username.getText().toString(),password.getText().toString());
+                    new loginAsync().execute(username.getText().toString(),password.getText().toString());
                 else
                     Snackbar.make(coordinatorLayout,errorMessage,Snackbar.LENGTH_LONG)
                         .show();
@@ -86,7 +90,11 @@ public class LoginActivity extends AppCompatActivity {
         });
      }
 
-    public class Async extends AsyncTask<String,Void,String> {
+    @Override
+    public void onBackPressed() {
+
+    }
+    public class loginAsync extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... params) {
             String url = "http://188.166.167.178/login.php";

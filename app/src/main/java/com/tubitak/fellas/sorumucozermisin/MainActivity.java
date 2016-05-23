@@ -3,6 +3,7 @@ package com.tubitak.fellas.sorumucozermisin;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,13 +12,28 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Vector;
+
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,13 +66,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         initialize();
-
     }
 
     private void initialize() {
-        for (int i=0; i<10; i++)
-            questions.add(new Question("","Soru metni burasi " + i,
-                    "soru basligi",(new Date(System.currentTimeMillis())).toString()));
+        new questionListAsync().execute();
     }
 
     @Override
@@ -92,5 +105,64 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public class questionListAsync extends AsyncTask<Void,Void,String>
+    {
+        @Override
+        protected String doInBackground(Void... params) {
+            String result = null;
+            String url = "http://188.166.167.178/getQuestions.php";
+            OkHttpClient client = new OkHttpClient();
+            RequestBody requestBody = new FormBody.Builder()
+                    .build();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+            Call call = client.newCall(request);
+            Response response = null;
+            try
+            {
+                response = call.execute();
+                if (response.isSuccessful())
+                {
+                    result = response.body().string();
+                }
+                else
+                {
+                    result = null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String questions) {
+            super.onPostExecute(questions);
+            List<Question> questionList= new Vector<Question>();
+            JSONArray reader = null;
+            if(questions!=null) {
+                try {
+                    reader = new JSONArray(questions);
+                    for(int i=0;i<reader.length();i++)
+                    {
+                        JSONObject r = reader.getJSONObject(i);
+                        Log.i("aaa",""+i);
+                        questionList.add(new Question(r.getInt("idquestion"),
+                                                    r.getString("username"),
+                                                    r.getString("title"),
+                                                    r.getString("question"),
+                                                    r.getString("photo"),
+                                                    r.getString("datequestion")
+                                ));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            mAdapter.updateList(questionList);
+        }
     }
 }

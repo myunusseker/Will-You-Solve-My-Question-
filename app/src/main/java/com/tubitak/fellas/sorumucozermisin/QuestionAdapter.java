@@ -25,13 +25,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView questionText, questionTitle;
+        public TextView questionText, questionTitle, questionUsername;
         public ImageView questionImage;
         public MyViewHolder(View itemView) {
             super(itemView);
             questionImage = (ImageView) itemView.findViewById(R.id.questionImage);
             questionText = (TextView) itemView.findViewById(R.id.questionText);
             questionTitle = (TextView) itemView.findViewById(R.id.questionTitle);
+            questionUsername = (TextView) itemView.findViewById(R.id.questionUsername);
         }
     }
     @Override
@@ -46,10 +47,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     public void onBindViewHolder(QuestionAdapter.MyViewHolder holder, int position) {
         Question question = questionList.get(position);
         holder.questionTitle.setText(question.getTitle());
-        holder.questionText.setText(question.getText());
+        holder.questionText.setText(question.getQuestion());
         holder.questionImage.setImageResource(R.mipmap.ic_launcher);
+        holder.questionUsername.setText(question.getUsername()+" tarafından soruldu");
     }
 
+    public void updateList(List<Question> newQuestions){
+        questionList = newQuestions;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return questionList.size();

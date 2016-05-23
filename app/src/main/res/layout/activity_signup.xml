@@ -1,34 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/coordinatorLayoutSignup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.tubitak.fellas.sorumucozermisin.SignupActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.AppBarLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.tubitak.fellas.sorumucozermisin.SignupActivity"
+        android:weightSum="1">
+        <ImageView
+            android:layout_width="147dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/web_hi_res_512"
+            />
+        <EditText
+            android:id="@+id/nameSignup"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:hint="Ad Soyad"
+            android:textAlignment="center"
+            />
+        <EditText
+            android:layout_marginTop="15dp"
+            android:id="@+id/usernameSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kullanıcı Adı (en az 6 karakter)"
+            android:textAlignment="center"
+            />
+        <EditText
+            android:layout_marginTop="15dp"
+            android:id="@+id/passwordSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Şifre (en az 6 karakter)"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            />
 
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_signup" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
-
+        <EditText
+            android:id="@+id/passwordConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Şifre tekrar"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            />
+        <Button
+            android:id="@+id/signup_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KAYIT OL"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+    </ScrollView>
 </android.support.design.widget.CoordinatorLayout>
