@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private QuestionAdapter mAdapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     ArrayList<Question> questions = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         String name = sharedPref.getString("name","Name yok.!");
         Toast.makeText(this ,"Hosgeldin " + name , Toast.LENGTH_LONG).show();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initialize();
+            }
+        });
         mAdapter = new QuestionAdapter(questions);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -163,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             mAdapter.updateList(questionList);
+            mSwipeRefreshLayout.setRefreshing(false);
         }
     }
 }
