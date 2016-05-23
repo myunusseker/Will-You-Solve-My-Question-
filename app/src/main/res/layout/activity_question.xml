@@ -1,58 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/coordinatorLayoutQuestion"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <ScrollView
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context="com.tubitak.fellas.sorumucozermisin.QuestionActivity">
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:context="com.tubitak.fellas.sorumucozermisin.QuestionActivity">
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:maxHeight="200dp"
+                android:id="@+id/photoQuestion"
+                android:src="@drawable/web_hi_res_512"
+                android:background="#FFFAAA"
+                android:layout_gravity="center" />
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/titleQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_marginTop="30dp"
+                    android:text="title"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:id="@+id/question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_marginTop="30dp"
+                    android:text="questionn"
+                    android:layout_gravity="center" />
+                <TextView
+                    android:id="@+id/usernameQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="300dp"
+                    android:text="tarafindan soruldu"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/dateQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
     <ImageView
+        android:id="@+id/expanded_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:maxHeight="200dp"
-        android:id="@+id/photoQuestion"
-        android:src="@drawable/web_hi_res_512"
-        android:background="#FFFAAA"
-        android:layout_gravity="center" />
-
-    <TextView
-        android:id="@+id/titleQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_marginTop="30dp"
-        android:text="title"
-        android:layout_gravity="center" />
-    <TextView
-        android:id="@+id/question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_marginTop="30dp"
-        android:text="questionn"
-        android:layout_gravity="center" />
-    <TextView
-        android:id="@+id/usernameQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="30dp"
-        android:text="tarafindan soruldu"
-        android:layout_gravity="right" />
-    <TextView
-        android:id="@+id/dateQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        />
-</LinearLayout>
-    </ScrollView>
-</android.support.design.widget.CoordinatorLayout>
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+</FrameLayout>

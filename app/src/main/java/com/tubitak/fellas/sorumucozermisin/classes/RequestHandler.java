@@ -24,7 +24,6 @@ import javax.net.ssl.HttpsURLConnection;
 public class RequestHandler {
     public static String sendPostRequest(String requestURL,
                                   HashMap<String, String> postDataParams) {
-
         URL url;
         String response = "";
         try {
