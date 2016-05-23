@@ -1,4 +1,4 @@
-package com.tubitak.fellas.sorumucozermisin;
+package com.tubitak.fellas.sorumucozermisin.classes;
 
 /**
  * Created by mehmet on 23/05/16.

@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity" />
-        <activity android:name=".AddQuestion" />
+        <activity android:name=".AddQuestionActivity" />
         <activity android:name=".QuestionActivity"></activity>
     </application>
 

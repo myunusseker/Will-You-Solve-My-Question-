@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tubitak.fellas.sorumucozermisin.classes.Question;
+
 public class QuestionActivity extends AppCompatActivity {
     Question myQ;
     private TextView title;

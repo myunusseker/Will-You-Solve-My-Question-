@@ -1,4 +1,4 @@
-package com.tubitak.fellas.sorumucozermisin;
+package com.tubitak.fellas.sorumucozermisin.classes;
 
 public class Question {
     private int id;

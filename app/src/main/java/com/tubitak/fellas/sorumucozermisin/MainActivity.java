@@ -17,6 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.tubitak.fellas.sorumucozermisin.classes.Globals;
+import com.tubitak.fellas.sorumucozermisin.classes.Question;
+import com.tubitak.fellas.sorumucozermisin.classes.QuestionAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddQuestion.class);
+                Intent intent = new Intent(MainActivity.this, AddQuestionActivity.class);
                 startActivity(intent);
             }
         });

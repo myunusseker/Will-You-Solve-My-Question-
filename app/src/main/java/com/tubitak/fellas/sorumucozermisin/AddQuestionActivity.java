@@ -12,11 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.tubitak.fellas.sorumucozermisin.classes.Globals;
+import com.tubitak.fellas.sorumucozermisin.classes.RequestHandler;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class AddQuestion extends AppCompatActivity {
+public class AddQuestionActivity extends AppCompatActivity {
 
     private Button button;
     private ImageView imageView;
@@ -67,7 +70,7 @@ public class AddQuestion extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             String imageString = RequestHandler.getStringImage(imageBitmap);
             HashMap<String, String> data = new HashMap<>();
-            data.put("username",Globals.username);
+            data.put("username", Globals.username);
             data.put("title",titleStr);
             data.put("question",questionStr);
             data.put("photo",imageString);

@@ -1,4 +1,4 @@
-package com.tubitak.fellas.sorumucozermisin;
+package com.tubitak.fellas.sorumucozermisin.classes;
 
 import android.graphics.Bitmap;
 import android.util.Base64;

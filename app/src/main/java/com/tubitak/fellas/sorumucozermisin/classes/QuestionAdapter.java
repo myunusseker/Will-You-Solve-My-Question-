@@ -1,9 +1,8 @@
-package com.tubitak.fellas.sorumucozermisin;
+package com.tubitak.fellas.sorumucozermisin.classes;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import org.w3c.dom.Text;
+import com.tubitak.fellas.sorumucozermisin.QuestionActivity;
+import com.tubitak.fellas.sorumucozermisin.R;
 
 import java.util.List;
 
