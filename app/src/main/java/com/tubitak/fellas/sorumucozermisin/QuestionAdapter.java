@@ -53,7 +53,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
         holder.questionTitle.setText(question.getTitle());
         holder.questionText.setText(question.getQuestion());
         holder.questionImage.setImageResource(R.mipmap.ic_launcher);
-        holder.questionUsername.setText(question.getUsername()+" tarafından soruldu");
+        holder.questionUsername.setText(question.getUsername()+". tarafından soruldu");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
