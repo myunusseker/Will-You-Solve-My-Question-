@@ -1,7 +1,10 @@
 package com.tubitak.fellas.sorumucozermisin;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import java.util.List;
  */
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyViewHolder> {
 
+    private Context context;
     private List<Question> questionList;
 
     public QuestionAdapter(List<Question> questionList) {
@@ -39,17 +43,32 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     public QuestionAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.question_list_row,parent,false);
-
+        context = parent.getContext();
         return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(QuestionAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(QuestionAdapter.MyViewHolder holder, final int position) {
         Question question = questionList.get(position);
         holder.questionTitle.setText(question.getTitle());
         holder.questionText.setText(question.getQuestion());
         holder.questionImage.setImageResource(R.mipmap.ic_launcher);
         holder.questionUsername.setText(question.getUsername()+" tarafından soruldu");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Question selected = questionList.get(position);
+                Log.i("aaabiii",questionList.get(position).getId()+" "+questionList.get(position).getQuestion());
+                Intent intent = new Intent(context, QuestionActivity.class);
+                intent.putExtra("idQuestion",selected.getId());
+                intent.putExtra("username",selected.getUsername());
+                intent.putExtra("title",selected.getTitle());
+                intent.putExtra("question",selected.getQuestion());
+                intent.putExtra("photo",selected.getPhoto());
+                intent.putExtra("date",selected.getDate());
+                context.startActivity(intent);
+            }
+        });
     }
 
     public void updateList(List<Question> newQuestions){

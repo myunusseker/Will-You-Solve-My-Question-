@@ -36,7 +36,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -158,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
                     for(int i=0;i<reader.length();i++)
                     {
                         JSONObject r = reader.getJSONObject(i);
-                        Log.i("aaa",""+i);
                         questionList.add(new Question(r.getInt("idquestion"),
                                                     r.getString("username"),
                                                     r.getString("title"),

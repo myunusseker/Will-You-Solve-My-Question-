@@ -22,7 +22,7 @@
             android:layout_width="147dp"
             android:layout_height="200dp"
             android:id="@+id/imageView"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:src="@drawable/web_hi_res_512"
             />
     <EditText
