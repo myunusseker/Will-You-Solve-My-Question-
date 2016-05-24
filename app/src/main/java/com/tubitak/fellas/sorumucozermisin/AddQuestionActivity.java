@@ -68,6 +68,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             textView.setVisibility(View.INVISIBLE);
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");
+            imageView.setBackground(null);
             imageView.setImageBitmap(imageBitmap);
         }
     }

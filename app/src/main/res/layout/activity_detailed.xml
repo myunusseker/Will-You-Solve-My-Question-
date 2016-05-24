@@ -25,11 +25,10 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/newQuestionImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_gravity="center"
-                    android:minHeight="150dp"
-                    android:background="#FFFAAA"/>
+                    android:background="@drawable/camera_icon"/>
 
                 <TextView
                     android:id="@+id/textInfoPhoto"
@@ -46,13 +45,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="30"
-                android:textAlignment="center"
                 android:background="@drawable/shadow"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
                 android:minHeight="55dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:paddingLeft="25dp"
                 android:hint="Soru başlığını giriniz"/>
 
             <EditText
@@ -62,7 +61,9 @@
                 android:id="@+id/questionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
+                android:paddingTop="20dp"
+                android:gravity="top"
+                android:paddingLeft="25dp"
                 android:background="@drawable/shadow"
                 android:maxLength="1000"
                 android:hint="Soruyu giriniz."
