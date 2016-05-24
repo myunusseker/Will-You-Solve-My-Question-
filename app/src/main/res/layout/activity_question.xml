@@ -90,6 +90,7 @@
                         android:layout_width="0dp"
                         android:layout_gravity="bottom"
                         android:text="Yolla"
+                        android:id="@+id/addAnswerButton"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>

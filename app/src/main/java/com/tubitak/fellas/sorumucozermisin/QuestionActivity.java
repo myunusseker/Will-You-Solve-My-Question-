@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -34,8 +35,10 @@ import android.widget.TextView;
 
 import com.tubitak.fellas.sorumucozermisin.classes.Answer;
 import com.tubitak.fellas.sorumucozermisin.classes.AnswerAdapter;
+import com.tubitak.fellas.sorumucozermisin.classes.Globals;
 import com.tubitak.fellas.sorumucozermisin.classes.Question;
 import com.tubitak.fellas.sorumucozermisin.classes.QuestionAdapter;
+import com.tubitak.fellas.sorumucozermisin.classes.RequestHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +46,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -66,6 +70,9 @@ public class QuestionActivity extends FragmentActivity {
     private TextView question;
     private TextView username;
     private TextView date;
+    private EditText newAnswer;
+    private Button addAnswerButton;
+    String newAnswerStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,12 +92,24 @@ public class QuestionActivity extends FragmentActivity {
         question = (TextView) findViewById(R.id.question);
         username = (TextView) findViewById(R.id.usernameQuestion);
         date = (TextView) findViewById(R.id.dateQuestion);
+        newAnswer = (EditText) findViewById(R.id.newAnswerText);
+        addAnswerButton = (Button) findViewById(R.id.addAnswerButton);
+        addAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newAnswerStr = newAnswer.getText().toString();
+                new addAnswer().execute();
+                setupUI(findViewById(R.id.container));
+                newAnswer.setText("");
+            }
+        });
         title.setText(myQ.getTitle());
         question.setText(myQ.getQuestion());
         username.setText(myQ.getUsername() + " tarafindan soruldu");
         date.setText(myQ.getDate());
 
         photo.setImageBitmap(myQ.getBitmapPhoto());
+        Log.i("image size", "" + myQ.getBitmapPhoto().getHeight() + " " + myQ.getBitmapPhoto().getWidth());
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,6 +225,34 @@ public class QuestionActivity extends FragmentActivity {
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
+
+    public class addAnswer extends AsyncTask<Void,Void,String>{
+        @Override
+        protected String doInBackground(Void... params) {
+            HashMap<String,String> data = new HashMap<>();
+            data.put("idquestion",String.valueOf(myQ.getId()));
+            data.put("username", Globals.username);
+            data.put("answer", newAnswerStr);
+            String response = RequestHandler.sendPostRequest(Globals.url + "addAnswer.php", data);
+            Log.i("asdf","add Answer Result -> " + response);
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                if(jsonObject.getString("result").equals("success")){
+                    new answerListAsync().execute();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.i("asdf","add Answer database hatasi MAL TUNAHAN");
+            }
+
+        }
+    }
+
     private void zoomImageFromThumb(final View thumbView) {
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();
