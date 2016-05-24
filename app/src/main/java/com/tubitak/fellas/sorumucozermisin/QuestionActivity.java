@@ -12,6 +12,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,7 +52,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class QuestionActivity extends AppCompatActivity {
+public class QuestionActivity extends FragmentActivity {
     private Animator mCurrentAnimator;
     private int mShortAnimationDuration;
     private RecyclerView recyclerView;
@@ -79,7 +80,7 @@ public class QuestionActivity extends AppCompatActivity {
         );
         myQ.setBitmapPhoto((Bitmap) getIntent().getParcelableExtra("bitmap"));
         title = (TextView) findViewById(R.id.titleQuestion);
-        photo = (ImageButton) findViewById(R.id.photoQuestion);
+        photo =  findViewById(R.id.photoQuestion);
         question = (TextView) findViewById(R.id.question);
         username = (TextView) findViewById(R.id.usernameQuestion);
         date = (TextView) findViewById(R.id.dateQuestion);
@@ -95,6 +96,8 @@ public class QuestionActivity extends AppCompatActivity {
                 zoomImageFromThumb(photo);
             }
         });
+        mShortAnimationDuration = getResources().getInteger(
+                android.R.integer.config_shortAnimTime);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_answer);
         mAdapter = new AnswerAdapter(answers);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
