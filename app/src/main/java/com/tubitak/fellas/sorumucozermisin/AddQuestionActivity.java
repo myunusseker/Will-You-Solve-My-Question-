@@ -76,7 +76,9 @@ public class AddQuestionActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(Void... params) {
-            String imageString = RequestHandler.getStringImage(imageBitmap);
+            String imageString = "";
+            if(imageBitmap != null)
+                imageString = RequestHandler.getStringImage(imageBitmap);
             HashMap<String, String> data = new HashMap<>();
             data.put("username", Globals.username);
             data.put("title",titleStr);

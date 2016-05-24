@@ -47,12 +47,12 @@
                 android:layout_height="wrap_content"
                 android:maxLength="30"
                 android:textAlignment="center"
-                android:background="#BBBBBB"
-                android:layout_marginTop="10dp"
+                android:background="@drawable/shadow"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="10dp"
+                android:minHeight="55dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:elevation="10dp"
                 android:hint="Soru başlığını giriniz"/>
 
             <EditText
@@ -63,11 +63,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:elevation="10dp"
-                android:background="#BBBBBB"
+                android:background="@drawable/shadow"
                 android:maxLength="1000"
                 android:hint="Soruyu giriniz."
-                android:minHeight="80dp"/>
+                android:minHeight="100dp"/>
             <Button
                 android:id="@+id/askQuestion"
                 android:layout_gravity="center"
