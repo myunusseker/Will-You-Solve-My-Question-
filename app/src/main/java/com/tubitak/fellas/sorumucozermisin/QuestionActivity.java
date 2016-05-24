@@ -83,7 +83,6 @@ public class QuestionActivity extends FragmentActivity {
                 getIntent().getStringExtra("username"),
                 getIntent().getStringExtra("title"),
                 getIntent().getStringExtra("question"),
-                getIntent().getStringExtra("photo"),
                 getIntent().getStringExtra("date")
         );
         myQ.setBitmapPhoto((Bitmap) getIntent().getParcelableExtra("bitmap"));
@@ -110,15 +109,22 @@ public class QuestionActivity extends FragmentActivity {
         username.setText(myQ.getUsername() + " tarafindan soruldu");
         date.setText(myQ.getDate());
 
-        photo.setImageBitmap(myQ.getBitmapPhoto());
-        Log.i("image size", "" + myQ.getBitmapPhoto().getHeight() + " " + myQ.getBitmapPhoto().getWidth());
-        photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                zoomImageFromThumb(photo);
-            }
-        });
 
+        if(getIntent().getStringExtra("photo").equals("NO"))
+        {
+            Log.i("ayyy","girdiaq");
+            photo.setVisibility(View.GONE);
+        }
+        else {
+            photo.setImageBitmap(myQ.getBitmapPhoto());
+            Log.i("image size", "" + myQ.getBitmapPhoto().getHeight() + " " + myQ.getBitmapPhoto().getWidth());
+            photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    zoomImageFromThumb(photo);
+                }
+            });
+        }
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
