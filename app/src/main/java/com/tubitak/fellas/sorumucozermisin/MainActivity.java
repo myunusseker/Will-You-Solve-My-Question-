@@ -174,9 +174,6 @@ public class MainActivity extends AppCompatActivity {
                                                     decodedByte,
                                                     r.getString("datequestion")
                                 ));
-
-
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

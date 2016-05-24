@@ -79,12 +79,6 @@ public class AddQuestionActivity extends AppCompatActivity {
             data.put("question",questionStr);
             data.put("photo",imageString);
             Log.i("asdf","-> " + imageString);
-
-            String Datetime;
-            Calendar c = Calendar.getInstance();
-            SimpleDateFormat dateformat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
-            Datetime = dateformat.format(c.getTime());
-            data.put("date",Datetime);
             String response = RequestHandler.sendPostRequest(Globals.url+"addQuestion.php",data);
             Log.i("response",response);
             return response;

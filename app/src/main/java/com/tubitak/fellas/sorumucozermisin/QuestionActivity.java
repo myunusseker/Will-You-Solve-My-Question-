@@ -6,22 +6,52 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tubitak.fellas.sorumucozermisin.classes.Answer;
+import com.tubitak.fellas.sorumucozermisin.classes.AnswerAdapter;
 import com.tubitak.fellas.sorumucozermisin.classes.Question;
+import com.tubitak.fellas.sorumucozermisin.classes.QuestionAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class QuestionActivity extends AppCompatActivity {
     private Animator mCurrentAnimator;
     private int mShortAnimationDuration;
+    private RecyclerView recyclerView;
+    private AnswerAdapter mAdapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    ArrayList<Answer> answers = new ArrayList<>();
     Question myQ;
     private TextView title;
     private View photo;
@@ -58,40 +88,91 @@ public class QuestionActivity extends AppCompatActivity {
                 zoomImageFromThumb(photo);
             }
         });
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_answer);
+        mAdapter = new AnswerAdapter(answers);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        initialize();
     }
+
+    private void initialize() {
+        new answerListAsync().execute();
+    }
+
+    public class answerListAsync extends AsyncTask<Void,Void,String>
+    {
+        @Override
+        protected String doInBackground(Void... params) {
+            String result = null;
+            String url = "http://188.166.167.178/getAnswers.php";
+            OkHttpClient client = new OkHttpClient();
+            RequestBody requestBody = new FormBody.Builder()
+                    .add("idquestion","28")
+                    .build();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+            Call call = client.newCall(request);
+            Response response = null;
+            try
+            {
+                response = call.execute();
+                if (response.isSuccessful())
+                {
+                    result = response.body().string();
+                }
+                else
+                {
+                    result = null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String answers) {
+            super.onPostExecute(answers);
+            List<Answer> answerList= new Vector<Answer>();
+            answerList.add(new Answer(1,"yunus","cevap","dateaq"));
+            JSONArray reader = null;
+            if(answers!=null) {
+                try {
+                    reader = new JSONArray(answers);
+                    for(int i=0;i<reader.length();i++)
+                    {
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            mAdapter.updateList(answerList);
+        }
+    }
+
     private void zoomImageFromThumb(final View thumbView) {
-        // If there's an animation in progress, cancel it
-        // immediately and proceed with this one.
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();
         }
 
-        // Load the high-resolution "zoomed-in" image.
         final ImageView expandedImageView = (ImageView) findViewById(
                 R.id.expanded_image);
         expandedImageView.setImageBitmap(myQ.getBitmapPhoto());
 
-        // Calculate the starting and ending bounds for the zoomed-in image.
-        // This step involves lots of math. Yay, math.
         final Rect startBounds = new Rect();
         final Rect finalBounds = new Rect();
         final Point globalOffset = new Point();
 
-        // The start bounds are the global visible rectangle of the thumbnail,
-        // and the final bounds are the global visible rectangle of the container
-        // view. Also set the container view's offset as the origin for the
-        // bounds, since that's the origin for the positioning animation
-        // properties (X, Y).
         thumbView.getGlobalVisibleRect(startBounds);
         findViewById(R.id.container)
                 .getGlobalVisibleRect(finalBounds, globalOffset);
         startBounds.offset(-globalOffset.x, -globalOffset.y);
         finalBounds.offset(-globalOffset.x, -globalOffset.y);
 
-        // Adjust the start bounds to be the same aspect ratio as the final
-        // bounds using the "center crop" technique. This prevents undesirable
-        // stretching during the animation. Also calculate the start scaling
-        // factor (the end scaling factor is always 1.0).
         float startScale;
         if ((float) finalBounds.width() / finalBounds.height()
                 > (float) startBounds.width() / startBounds.height()) {
@@ -102,7 +183,6 @@ public class QuestionActivity extends AppCompatActivity {
             startBounds.left -= deltaWidth;
             startBounds.right += deltaWidth;
         } else {
-            // Extend start bounds vertically
             startScale = (float) startBounds.width() / finalBounds.width();
             float startHeight = startScale * finalBounds.height();
             float deltaHeight = (startHeight - startBounds.height()) / 2;
@@ -110,20 +190,12 @@ public class QuestionActivity extends AppCompatActivity {
             startBounds.bottom += deltaHeight;
         }
 
-        // Hide the thumbnail and show the zoomed-in view. When the animation
-        // begins, it will position the zoomed-in view in the place of the
-        // thumbnail.
         thumbView.setAlpha(0f);
         expandedImageView.setVisibility(View.VISIBLE);
 
-        // Set the pivot point for SCALE_X and SCALE_Y transformations
-        // to the top-left corner of the zoomed-in view (the default
-        // is the center of the view).
         expandedImageView.setPivotX(0f);
         expandedImageView.setPivotY(0f);
 
-        // Construct and run the parallel animation of the four translation and
-        // scale properties (X, Y, SCALE_X, and SCALE_Y).
         AnimatorSet set = new AnimatorSet();
         set
                 .play(ObjectAnimator.ofFloat(expandedImageView, View.X,
@@ -149,9 +221,6 @@ public class QuestionActivity extends AppCompatActivity {
         set.start();
         mCurrentAnimator = set;
 
-        // Upon clicking the zoomed-in image, it should zoom back down
-        // to the original bounds and show the thumbnail instead of
-        // the expanded image.
         final float startScaleFinal = startScale;
         expandedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,8 +229,6 @@ public class QuestionActivity extends AppCompatActivity {
                     mCurrentAnimator.cancel();
                 }
 
-                // Animate the four positioning/sizing properties in parallel,
-                // back to their original values.
                 AnimatorSet set = new AnimatorSet();
                 set.play(ObjectAnimator
                         .ofFloat(expandedImageView, View.X, startBounds.left))

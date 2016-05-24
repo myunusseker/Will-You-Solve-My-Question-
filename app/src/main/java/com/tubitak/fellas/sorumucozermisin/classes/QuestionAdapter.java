@@ -78,7 +78,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
         notifyDataSetChanged();
     }
     @Override
-    public int getItemCount() {
+    public int getItemCount()  {
         return questionList.size();
     }
 }
