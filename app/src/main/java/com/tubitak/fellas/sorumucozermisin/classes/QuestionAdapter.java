@@ -2,6 +2,8 @@ package com.tubitak.fellas.sorumucozermisin.classes;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import java.util.List;
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyViewHolder> {
 
     private Context context;
+    private Bitmap camIcon;
     private List<Question> questionList;
 
     public QuestionAdapter(List<Question> questionList) {
@@ -44,6 +47,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.question_list_row,parent,false);
         context = parent.getContext();
+        camIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.camera_icon);
         return new MyViewHolder(itemView);
     }
 
@@ -52,9 +56,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
         Question question = questionList.get(position);
         holder.questionTitle.setText(question.getTitle());
         holder.questionText.setText(question.getQuestion());
-        holder.questionImage.setImageResource(R.mipmap.ic_launcher);
-        holder.questionUsername.setText(question.getUsername()+" tarafından soruldu");
-        holder.questionImage.setImageBitmap(question.getBitmapPhoto());
+        holder.questionUsername.setText(question.getUsername());
+        if(question.getPhoto().equals("YES"))
+            holder.questionImage.setImageBitmap(question.getBitmapPhoto());
+        else
+        {
+            holder.questionImage.setImageBitmap(camIcon);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

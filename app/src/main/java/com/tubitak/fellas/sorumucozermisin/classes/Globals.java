@@ -1,5 +1,12 @@
 package com.tubitak.fellas.sorumucozermisin.classes;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
+import com.tubitak.fellas.sorumucozermisin.R;
+
 /**
  * Created by mehmet on 23/05/16.
  */

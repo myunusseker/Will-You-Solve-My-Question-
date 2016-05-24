@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shadow"
+    android:background="#E6E6E6"
+    android:layout_marginTop="5dp"
     android:clickable="true">
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:focusable="true"
-        android:paddingTop="10dp"
-        android:id="@+id/questionImage" />
-    <TextView
-        android:id="@+id/questionTitle"
-        android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:gravity="left"
-        android:textColor="#9f2222"
-        android:textStyle="bold"
-        android:text="SORU BASLIGI"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/questionText"
-        android:gravity="left"
-        android:paddingTop="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_width="match_parent"
-        android:text="Soruuuuuuudsajfasfasdklfjaslkdfhsajdhfsjadklhfjsadklhfjklasdhfjklasdhjfkl"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/questionUsername"
-        android:gravity="right"
+        android:src="@drawable/camera_icon"
         android:paddingTop="5dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:id="@+id/questionImage" />
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:text="sorulduuuuuuu"
-        android:layout_height="wrap_content" />
+        android:layout_height="100dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:id="@+id/relativeLayoutQuestion">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/questionTitle"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:text="SORU BASLIGI"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/questionText"
+                android:gravity="left"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:text="Soruuuuuuudsajfasfasdklfjaslkdfhsajdhfsjadklhfjsadklhfjklasdhfjklasdhjfkl"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/questionUsername"
+            android:gravity="right"
+            android:textSize="11dp"
+            android:textColor="#000000"
+            android:paddingTop="3dp"
+            android:paddingBottom="5dp"
+            android:layout_width="match_parent"
+            android:text="sorulduuuuuuu"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 </LinearLayout>
