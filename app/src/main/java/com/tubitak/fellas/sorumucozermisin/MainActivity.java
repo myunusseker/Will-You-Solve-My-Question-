@@ -163,7 +163,9 @@ public class MainActivity extends AppCompatActivity {
                     for(int i=0;i<reader.length();i++)
                     {
                         JSONObject r = reader.getJSONObject(i);
+                        String photo = "YES";
                         String encodedImage = r.getString("photo");
+                        if(encodedImage.equals("null")) photo = "NO";
                         byte[] decodedString = Base64.decode(r.getString("photo"), Base64.DEFAULT);
                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
@@ -172,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
                                                     r.getString("title"),
                                                     r.getString("question"),
                                                     decodedByte,
+                                                    photo,
                                                     r.getString("datequestion")
                                 ));
                     }
