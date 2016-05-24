@@ -14,27 +14,57 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/newQuestionImage"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="150dp"
-                android:background="#FFFAAA"/>
+                android:elevation="10dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/newQuestionImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:minHeight="150dp"
+                    android:background="#FFFAAA"/>
 
+                <TextView
+                    android:id="@+id/textInfoPhoto"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_alignBottom="@id/newQuestionImage"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="Sorunun fotoğrafını eklemek için tıklayın"/>
+            </FrameLayout>
             <EditText
                 android:id="@+id/questionTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="30"
                 android:textAlignment="center"
+                android:background="#BBBBBB"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:elevation="10dp"
                 android:hint="Soru başlığını giriniz"/>
 
             <EditText
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:id="@+id/questionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:elevation="10dp"
+                android:background="#BBBBBB"
                 android:maxLength="1000"
                 android:hint="Soruyu giriniz."
                 android:minHeight="80dp"/>

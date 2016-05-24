@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tubitak.fellas.sorumucozermisin.classes.Globals;
@@ -29,6 +30,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     private ImageView imageView;
     private Bitmap imageBitmap;
     private EditText title, question;
+    private TextView textView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private String titleStr, questionStr;
 
@@ -39,12 +41,13 @@ public class AddQuestionActivity extends AppCompatActivity {
 
         title = (EditText) findViewById(R.id.questionTitle);
         question = (EditText) findViewById(R.id.questionText);
+        textView = (TextView) findViewById(R.id.textInfoPhoto);
         imageView = (ImageView) findViewById(R.id.newQuestionImage);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         });
 
@@ -62,6 +65,7 @@ public class AddQuestionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            textView.setVisibility(View.INVISIBLE);
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");
             imageView.setImageBitmap(imageBitmap);
@@ -78,7 +82,7 @@ public class AddQuestionActivity extends AppCompatActivity {
             data.put("title",titleStr);
             data.put("question",questionStr);
             data.put("photo",imageString);
-            Log.i("asdf","-> " + imageString);
+            Log.i("asdf", "-> " + imageString);
             String response = RequestHandler.sendPostRequest(Globals.url+"addQuestion.php",data);
             Log.i("response",response);
             return response;
@@ -92,10 +96,13 @@ public class AddQuestionActivity extends AppCompatActivity {
                     Intent intent = new Intent(AddQuestionActivity.this,MainActivity.class);
                     startActivity(intent);
                 }
+                else {
+                    Log.i("asdf","response->" + response);
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.i("asdf","response2 -> " + response);
+                Log.i("asdf","response2 -> Database problemi" + response);
             }
         }
     }
