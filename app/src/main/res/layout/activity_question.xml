@@ -87,6 +87,7 @@
                 android:id="@+id/addAnswerLayout"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
+                android:paddingBottom="3dp"
                 android:layout_alignParentBottom="true"
                 android:layout_height="wrap_content">
                 <EditText
@@ -99,7 +100,10 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_gravity="bottom"
+                    android:background="@drawable/button"
                     android:text="Yolla"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
                     android:id="@+id/addAnswerButton"
                     android:layout_height="wrap_content" />
             </LinearLayout>
