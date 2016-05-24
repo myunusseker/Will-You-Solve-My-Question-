@@ -61,7 +61,7 @@ public class QuestionActivity extends FragmentActivity {
     ArrayList<Answer> answers = new ArrayList<>();
     Question myQ;
     private TextView title;
-    private View photo;
+    private ImageView photo;
     private TextView question;
     private TextView username;
     private TextView date;
@@ -80,7 +80,7 @@ public class QuestionActivity extends FragmentActivity {
         );
         myQ.setBitmapPhoto((Bitmap) getIntent().getParcelableExtra("bitmap"));
         title = (TextView) findViewById(R.id.titleQuestion);
-        photo =  findViewById(R.id.photoQuestion);
+        photo =  (ImageView) findViewById(R.id.photoQuestion);
         question = (TextView) findViewById(R.id.question);
         username = (TextView) findViewById(R.id.usernameQuestion);
         date = (TextView) findViewById(R.id.dateQuestion);
@@ -88,8 +88,10 @@ public class QuestionActivity extends FragmentActivity {
         question.setText(myQ.getQuestion());
         username.setText(myQ.getUsername() + " tarafindan soruldu");
         date.setText(myQ.getDate());
-        BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), myQ.getBitmapPhoto());
-        photo.setBackground(bitmapDrawable);
+        //BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), myQ.getBitmapPhoto());
+        //photo.setBackground(bitmapDrawable);
+        photo.setImageBitmap(myQ.getBitmapPhoto());
+        Log.i("image size",""+myQ.getBitmapPhoto().getHeight()+" "+myQ.getBitmapPhoto().getWidth());
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,10 +205,9 @@ public class QuestionActivity extends FragmentActivity {
             mCurrentAnimator.cancel();
         }
 
-        final ImageView expandedImageView = (ImageView) findViewById(
-                R.id.expanded_image);
+        final ImageView expandedImageView = (ImageView) findViewById(R.id.expanded_image);
         expandedImageView.setImageBitmap(myQ.getBitmapPhoto());
-
+        Log.i("image size",""+expandedImageView.getHeight()+" "+expandedImageView.getWidth());
         final Rect startBounds = new Rect();
         final Rect finalBounds = new Rect();
         final Point globalOffset = new Point();
