@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -88,18 +89,18 @@ public class QuestionActivity extends FragmentActivity {
         question.setText(myQ.getQuestion());
         username.setText(myQ.getUsername() + " tarafindan soruldu");
         date.setText(myQ.getDate());
-        //BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), myQ.getBitmapPhoto());
-        //photo.setBackground(bitmapDrawable);
+
         photo.setImageBitmap(myQ.getBitmapPhoto());
-        Log.i("image size",""+myQ.getBitmapPhoto().getHeight()+" "+myQ.getBitmapPhoto().getWidth());
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 zoomImageFromThumb(photo);
             }
         });
+
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_answer);
         mAdapter = new AnswerAdapter(answers);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -199,15 +200,23 @@ public class QuestionActivity extends FragmentActivity {
             mAdapter.updateList(answerList);
         }
     }
-
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
     private void zoomImageFromThumb(final View thumbView) {
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();
         }
 
         final ImageView expandedImageView = (ImageView) findViewById(R.id.expanded_image);
+        if(myQ.getBitmapPhoto().getWidth() > myQ.getBitmapPhoto().getHeight())
+        {
+            myQ.setBitmapPhoto(RotateBitmap(myQ.getBitmapPhoto(),-90));
+        }
         expandedImageView.setImageBitmap(myQ.getBitmapPhoto());
-        Log.i("image size",""+expandedImageView.getHeight()+" "+expandedImageView.getWidth());
         final Rect startBounds = new Rect();
         final Rect finalBounds = new Rect();
         final Point globalOffset = new Point();
