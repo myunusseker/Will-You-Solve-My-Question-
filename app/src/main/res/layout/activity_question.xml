@@ -23,78 +23,86 @@
                 android:background="#FFFAAA"
                 android:layout_gravity="center" />
         </RelativeLayout>
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/titleQuestion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textColor="#9f2222"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    android:text="title"
-                    android:layout_gravity="left" />
-                <TextView
-                    android:id="@+id/question"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:layout_marginTop="5dp"
-                    android:text="questionn"
-                    android:layout_gravity="left"
-                    />
-                <TextView
-                    android:id="@+id/usernameQuestion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:paddingRight="10dp"
-                    android:text="tarafindan soruldu"
-                    android:layout_gravity="right"
-                    />
-                <TextView
-                    android:id="@+id/dateQuestion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="a"
-                    android:paddingRight="10dp"
-                    android:layout_gravity="right"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CEVAPLAR:"
-                    android:paddingLeft="10dp"
-                    android:textColor="#9f2222"
-                    android:textStyle="bold"
-                    android:layout_gravity="left"/>
-                <include layout="@layout/content_question"/>
+                android:layout_above="@+id/addAnswerLayout"
+                android:layout_height="wrap_content">
                 <LinearLayout
+                    android:layout_gravity="top"
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:id="@+id/newAnswerText"
-                        android:layout_width="0dp"
-                        android:layout_weight="3"
-                        android:hint="Bir cevap yazın."
-                        android:layout_height="wrap_content" />
-                    <Button
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_gravity="bottom"
-                        android:text="Yolla"
-                        android:id="@+id/addAnswerButton"
-                        android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/titleQuestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="#9f2222"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="title"
+                        android:layout_gravity="left" />
+                    <TextView
+                        android:id="@+id/question"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:layout_marginTop="5dp"
+                        android:text="questionn"
+                        android:layout_gravity="left"
+                        />
+                    <TextView
+                        android:id="@+id/usernameQuestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:paddingRight="10dp"
+                        android:text="tarafindan soruldu"
+                        android:layout_gravity="right"
+                        />
+                    <TextView
+                        android:id="@+id/dateQuestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="a"
+                        android:paddingRight="10dp"
+                        android:layout_gravity="right"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CEVAPLAR:"
+                        android:paddingLeft="10dp"
+                        android:textColor="#9f2222"
+                        android:textStyle="bold"
+                        android:layout_gravity="left"/>
+                    <include layout="@layout/content_question"/>
                 </LinearLayout>
+            </ScrollView>
+            <LinearLayout
+                android:id="@+id/addAnswerLayout"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/newAnswerText"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:hint="Bir cevap yazın."
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_gravity="bottom"
+                    android:text="Yolla"
+                    android:id="@+id/addAnswerButton"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-        </ScrollView>
+        </RelativeLayout>
     </LinearLayout>
     <ImageView
         android:id="@+id/expanded_image"

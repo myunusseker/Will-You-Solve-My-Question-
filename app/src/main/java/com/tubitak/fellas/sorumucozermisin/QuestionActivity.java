@@ -98,6 +98,8 @@ public class QuestionActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 newAnswerStr = newAnswer.getText().toString();
+                if(newAnswerStr.length() == 0)
+                    return;
                 new addAnswer().execute();
                 setupUI(findViewById(R.id.container));
                 newAnswer.setText("");
