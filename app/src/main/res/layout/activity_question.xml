@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ScrollView
+                android:layout_alignParentTop="true"
                 android:layout_width="match_parent"
                 android:layout_above="@+id/addAnswerLayout"
                 android:layout_height="wrap_content">
