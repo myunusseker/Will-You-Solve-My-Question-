@@ -18,6 +18,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
@@ -109,7 +110,7 @@ public class QuestionActivity extends AppCompatActivity {
             String url = "http://188.166.167.178/getAnswers.php";
             OkHttpClient client = new OkHttpClient();
             RequestBody requestBody = new FormBody.Builder()
-                    .add("idquestion","28")
+                    .add("idquestion", String.valueOf(myQ.getId()))
                     .build();
             Request request = new Request.Builder()
                     .url(url)
@@ -138,13 +139,18 @@ public class QuestionActivity extends AppCompatActivity {
         protected void onPostExecute(String answers) {
             super.onPostExecute(answers);
             List<Answer> answerList= new Vector<Answer>();
-            answerList.add(new Answer(1,"yunus","cevap","dateaq"));
             JSONArray reader = null;
             if(answers!=null) {
                 try {
                     reader = new JSONArray(answers);
                     for(int i=0;i<reader.length();i++)
                     {
+                        JSONObject r = reader.getJSONObject(i);
+                        answerList.add(new Answer(r.getInt("idanswer"),
+                                r.getString("username"),
+                                r.getString("answer"),
+                                r.getString("dateanswer")
+                        ));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

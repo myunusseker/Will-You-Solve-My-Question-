@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="15dp"
     android:fitsSystemWindows="true"
+    android:background="@drawable/background_settings"
     tools:context="com.tubitak.fellas.sorumucozermisin.MainActivity">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_input_add" />
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:src="@drawable/ic_my_add" />
 
 </android.support.design.widget.CoordinatorLayout>

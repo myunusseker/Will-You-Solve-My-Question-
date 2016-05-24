@@ -1,35 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#AAAAAA"
-    android:padding="3dp"
-    android:layout_margin="3dp"
-    android:layout_height="wrap_content" android:clickable="true">
-
-    <TextView
-        android:id="@+id/questionTitle"
-        android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:gravity="left"
-        android:layout_height="wrap_content" />
-
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow"
+    android:clickable="true">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:focusable="true"
+        android:paddingTop="10dp"
         android:id="@+id/questionImage" />
-
+    <TextView
+        android:id="@+id/questionTitle"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="left"
+        android:textColor="#9f2222"
+        android:textStyle="bold"
+        android:text="SORU BASLIGI"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/questionText"
         android:gravity="left"
-        android:background="#999999"
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_width="match_parent"
+        android:text="Soruuuuuuudsajfasfasdklfjaslkdfhsajdhfsjadklhfjsadklhfjklasdhfjklasdhjfkl"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/questionUsername"
         android:gravity="right"
-        android:background="#888888"
+        android:paddingTop="5dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
+        android:text="sorulduuuuuuu"
         android:layout_height="wrap_content" />
 </LinearLayout>
