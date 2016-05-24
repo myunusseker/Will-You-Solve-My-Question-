@@ -35,6 +35,10 @@
                 android:textColor="#333333"
                 android:text="SORU BASLIGI"
                 android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#a5adb0" />
             <TextView
                 android:id="@+id/questionText"
                 android:gravity="left"
