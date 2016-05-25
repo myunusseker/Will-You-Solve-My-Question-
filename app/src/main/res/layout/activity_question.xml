@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +22,8 @@
                 android:maxHeight="200dp"
                 android:id="@+id/photoQuestion"
                 android:background="#FFFAAA"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:onClick="expandedAction"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,25 +32,41 @@
                 android:layout_alignParentTop="true"
                 android:layout_width="match_parent"
                 android:layout_above="@+id/addAnswerLayout"
+                android:background="#d3d3d3"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_gravity="top"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#F2F2F2"
+                        android:layout_marginTop="3dp"
+                        android:orientation="vertical">
                     <TextView
                         android:id="@+id/titleQuestion"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:textColor="#9f2222"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="15dp"
+                        android:textColor="#627AAD"
                         android:textStyle="bold"
+                        android:textSize="15dp"
                         android:layout_marginTop="10dp"
                         android:text="title"
                         android:layout_gravity="left" />
-                    <TextView
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_gravity="center"
+                            android:background="#a5adb0" />
+                        <TextView
                         android:id="@+id/question"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
@@ -56,30 +74,39 @@
                         android:text="questionn"
                         android:layout_gravity="left"
                         />
-                    <TextView
-                        android:id="@+id/usernameQuestion"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         android:paddingTop="5dp"
-                        android:paddingRight="10dp"
-                        android:text="tarafindan soruldu"
-                        android:layout_gravity="right"
-                        />
-                    <TextView
-                        android:id="@+id/dateQuestion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="a"
-                        android:paddingRight="10dp"
-                        android:layout_gravity="right"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CEVAPLAR:"
-                        android:paddingLeft="10dp"
-                        android:textColor="#9f2222"
-                        android:textStyle="bold"
-                        android:layout_gravity="left"/>
+                        android:paddingBottom="10dp"
+                        android:weightSum="2">
+                        <TextView
+                            android:id="@+id/usernameQuestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:paddingLeft="15dp"
+                            android:text="tarafindan soruldu"
+                            android:gravity="left"
+                            />
+                        <TextView
+                            android:id="@+id/dateQuestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textSize="11dp"
+                            android:text="a"
+                            android:paddingRight="20dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#a5adb0" />
                     <include layout="@layout/content_question"/>
                 </LinearLayout>
             </ScrollView>

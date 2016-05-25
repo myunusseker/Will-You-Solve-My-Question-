@@ -71,6 +71,7 @@ public class QuestionActivity extends FragmentActivity {
     private TextView username;
     private TextView date;
     private EditText newAnswer;
+    private ImageView expandedImageView = null;
     private Button addAnswerButton;
     String newAnswerStr;
     @Override
@@ -106,13 +107,13 @@ public class QuestionActivity extends FragmentActivity {
         });
         title.setText(myQ.getTitle());
         question.setText(myQ.getQuestion());
-        username.setText(myQ.getUsername() + " tarafindan soruldu");
+        username.setText(myQ.getUsername());
         date.setText(myQ.getDate());
 
 
         if(getIntent().getStringExtra("photo").equals("NO"))
         {
-            Log.i("ayyy","girdiaq");
+            Log.i("ayyy","girdi");
             photo.setVisibility(View.GONE);
         }
         else {
@@ -266,7 +267,7 @@ public class QuestionActivity extends FragmentActivity {
             mCurrentAnimator.cancel();
         }
 
-        final ImageView expandedImageView = (ImageView) findViewById(R.id.expanded_image);
+        expandedImageView = (ImageView) findViewById(R.id.expanded_image);
         if(myQ.getBitmapPhoto().getWidth() > myQ.getBitmapPhoto().getHeight())
         {
             myQ.setBitmapPhoto(RotateBitmap(myQ.getBitmapPhoto(),-90));
@@ -371,5 +372,16 @@ public class QuestionActivity extends FragmentActivity {
                 mCurrentAnimator = set;
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        if(expandedImageView != null && expandedImageView.getVisibility()!= View.GONE)
+        {
+            expandedImageView.performClick();
+        }
+        else
+        {
+            this.finish();
+        }
     }
 }

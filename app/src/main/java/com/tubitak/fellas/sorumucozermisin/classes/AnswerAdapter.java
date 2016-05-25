@@ -49,7 +49,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
         Answer answer = answerList.get(position);
         holder.answerText.setText(answer.getAnswer());
         holder.answerDate.setText(answer.getDate());
-        holder.answerUsername.setText(answer.getUsername()+" tarafından cevaplandı");
+        holder.answerUsername.setText(answer.getUsername());
     }
     public void updateList(List<Answer> newAnswers){
         answerList = newAnswers;
