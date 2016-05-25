@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="#d3d3d3"
+    android:background="#D2D5DA"
     tools:context="com.tubitak.fellas.sorumucozermisin.MainActivity">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
